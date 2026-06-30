@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import type { Product } from "@/types/product";
+import CheckoutButton from "@/components/CheckoutButton";
 
 interface Props {
   product: Product;
@@ -17,6 +18,7 @@ export default function ProductSection({ product }: Props) {
     <section id="product" className="px-6 lg:px-8 py-24 lg:py-36 bg-[#F6F6F6]">
       <div className="max-w-7xl mx-auto">
         <div ref={ref} className="grid lg:grid-cols-2 gap-16 items-center">
+
           {/* Product visual */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -94,7 +96,6 @@ export default function ProductSection({ product }: Props) {
             </div>
 
             <div className="flex flex-col gap-4 pt-4 border-t border-black/6">
-              {/* TODO: Replace price with Shopify product.priceRange.minVariantPrice.amount */}
               <div className="flex items-baseline gap-3">
                 <span className="text-[#0A0A0A] font-black text-4xl">{product.price}</span>
                 {product.compareAtPrice && (
@@ -102,24 +103,19 @@ export default function ProductSection({ product }: Props) {
                 )}
               </div>
 
-              {/* TODO: Replace href with Shopify checkout URL or cart add mutation */}
-              {/* TODO: Disable button when product.available === false */}
-              <a
-                href={product.checkoutUrl}
-                className={`px-8 py-4 rounded-full text-sm font-bold tracking-wide text-center transition-colors duration-200 ${
-                  product.available
-                    ? "bg-[#C8FF3D] text-black hover:bg-[#0A0A0A] hover:text-white"
-                    : "bg-[#E8E8E8] text-[#A0A0A0] cursor-not-allowed pointer-events-none"
-                }`}
+              <CheckoutButton
+                className="px-8 py-4 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
+                loadingClassName="px-8 py-4 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
               >
-                {product.available ? "Add to Routine" : "Out of Stock"}
-              </a>
+                Add to Routine
+              </CheckoutButton>
 
               <p className="text-[#A0A0A0] text-xs">
                 Free shipping on orders over $50. 30-day routine guarantee.
               </p>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>

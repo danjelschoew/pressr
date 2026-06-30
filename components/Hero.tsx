@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import type { Product } from "@/types/product";
+import CheckoutButton from "@/components/CheckoutButton";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -58,12 +59,12 @@ export default function Hero({ product }: Props) {
             custom={3} variants={fadeUp} initial="hidden" animate="show"
             className="flex flex-col sm:flex-row gap-3"
           >
-            <a
-              href={product.checkoutUrl}
+            <CheckoutButton
               className="px-7 py-4 rounded-full bg-[#0A0A0A] text-white font-bold text-sm tracking-wide hover:bg-[#C8FF3D] hover:text-black transition-colors duration-200 text-center"
+              loadingClassName="px-7 py-4 rounded-full bg-[#0A0A0A]/60 text-white font-bold text-sm tracking-wide text-center cursor-wait"
             >
               Start Your Routine
-            </a>
+            </CheckoutButton>
             <a
               href="#philosophy"
               className="px-7 py-4 rounded-full border border-black/12 text-[#0A0A0A] font-semibold text-sm tracking-wide hover:border-black/30 hover:bg-black/3 transition-colors duration-200 text-center"
@@ -122,12 +123,12 @@ export default function Hero({ product }: Props) {
                 <p className="text-[#0A0A0A] font-black text-2xl">{product.price}</p>
               </div>
 
-              <a
-                href={product.checkoutUrl}
+              <CheckoutButton
                 className="w-full py-3 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
+                loadingClassName="w-full py-3 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
               >
                 Add to Routine
-              </a>
+              </CheckoutButton>
             </div>
           </div>
         </motion.div>

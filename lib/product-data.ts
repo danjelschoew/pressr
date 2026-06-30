@@ -1,8 +1,7 @@
 import type { Product } from "@/types/product";
 
-// Static fallback used when Shopify env vars are not configured.
-// The page renders correctly with this data so you can preview the design
-// before connecting a store.
+const checkoutUrl = process.env.NEXT_PUBLIC_CHECKOUT_URL ?? "#";
+
 export const fallbackProduct: Product = {
   id: "pressr-match-routine-gummies",
   title: "PRESSR Match Routine Gummies",
@@ -19,15 +18,8 @@ export const fallbackProduct: Product = {
   ],
   imageUrl: null,
   imageAlt: "PRESSR Match Routine Gummies",
-  checkoutUrl: process.env.NEXT_PUBLIC_SHOPIFY_CHECKOUT_URL ?? "#checkout",
+  checkoutUrl,
   available: true,
-  variants: [
-    {
-      id: "default",
-      title: "30 Gummies",
-      price: "$34.95",
-      available: true,
-    },
-  ],
+  variants: [{ id: "default", title: "30 Gummies", price: "$34.95", available: true }],
   badge: "Matchday Edition",
 };

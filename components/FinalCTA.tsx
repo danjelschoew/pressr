@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import CheckoutButton from "@/components/CheckoutButton";
 
 export default function FinalCTA() {
   const ref = useRef(null);
@@ -41,12 +42,12 @@ export default function FinalCTA() {
           transition={{ duration: 0.6, delay: 0.25 }}
           className="flex flex-col sm:flex-row gap-3 justify-center"
         >
-          <a
-            href="#product"
+          <CheckoutButton
             className="px-8 py-4 rounded-full bg-[#C8FF3D] text-black font-bold text-sm tracking-wide hover:bg-white transition-colors duration-200 text-center"
+            loadingClassName="px-8 py-4 rounded-full bg-[#C8FF3D]/60 text-black font-bold text-sm tracking-wide text-center cursor-wait"
           >
             Join PRESSR
-          </a>
+          </CheckoutButton>
           <a
             href="#philosophy"
             className="px-8 py-4 rounded-full border border-white/15 text-white font-semibold text-sm tracking-wide hover:border-white/40 transition-colors duration-200 text-center"
