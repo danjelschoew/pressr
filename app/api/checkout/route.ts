@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { getProductByHandle, createCart } from "@/lib/shopify";
 
+export function GET() {
+  return NextResponse.json({ ok: true, message: "Checkout API route exists" });
+}
+
 export async function POST() {
   const handle = process.env.SHOPIFY_PRODUCT_HANDLE;
 
