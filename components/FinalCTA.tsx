@@ -46,13 +46,13 @@ export default function FinalCTA() {
             className="px-8 py-4 rounded-full bg-[#C8FF3D] text-black font-bold text-sm tracking-wide hover:bg-white transition-colors duration-200 text-center"
             loadingClassName="px-8 py-4 rounded-full bg-[#C8FF3D]/60 text-black font-bold text-sm tracking-wide text-center cursor-wait"
           >
-            Start Your Preparation
+            Get MATCHDAY
           </CheckoutButton>
           <a
             href="#philosophy"
             className="px-8 py-4 rounded-full border border-white/15 text-white font-semibold text-sm tracking-wide hover:border-white/40 transition-colors duration-200 text-center"
           >
-            Learn the Method
+            Learn More
           </a>
         </motion.div>
       </div>

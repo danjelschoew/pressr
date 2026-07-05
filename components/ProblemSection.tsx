@@ -36,13 +36,17 @@ export default function ProblemSection() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-[#6B6B6B] text-lg lg:text-xl leading-relaxed max-w-2xl"
         >
-          Every footballer trains their touch, speed, passing and finishing. But
-          matchday asks for more. The pressure before kickoff. The mistake that
-          stays in your head. The moment the coach is watching. The difference
-          between playing free in training and playing tight in the match.{" "}
-          <span className="text-[#0A0A0A] font-semibold">
-            PRESSR was built for those moments.
-          </span>
+          You trained all week. You know what you&apos;re capable of.
+          <br />
+          But the pressure before kickoff doesn&apos;t care about training.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-[#0A0A0A] text-lg lg:text-xl leading-relaxed max-w-2xl font-semibold mt-4"
+        >
+          PRESSR is part of the preparation that closes the gap.
         </motion.p>
 
         <motion.div

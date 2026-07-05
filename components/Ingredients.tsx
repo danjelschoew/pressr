@@ -8,19 +8,19 @@ const ingredients = [
     name: "Ashwagandha (KSM-66)",
     role: "Adaptogen",
     description:
-      "An adaptogenic herb used for centuries to help the body manage stress. KSM-66 is one of the most researched forms, with clinical studies supporting its use for mental resilience and recovery.",
+      "An adaptogenic herb with a long history of use in sports nutrition. KSM-66 is a patented, standardised root extract — one of the most studied forms of ashwagandha available.",
   },
   {
     name: "Vitamin D",
     role: "Muscle & Immune support",
     description:
-      "Supports muscle function, bone strength and immune health. Especially important for athletes training and competing in low-sunlight conditions — a deficiency is extremely common across northern Europe.",
+      "Contributes to normal muscle function and immune system function. Especially relevant for athletes in northern Europe, where sunlight exposure is limited for much of the year.",
   },
   {
     name: "Vitamin B12",
     role: "Energy metabolism",
     description:
-      "Essential for energy metabolism and nervous system function. Helps reduce tiredness and fatigue — keeping you sharp from warm-up to the final whistle.",
+      "Contributes to normal energy-yielding metabolism and nervous system function. A well-established nutrient included at a meaningful dose.",
   },
   {
     name: "Black Pepper Extract",

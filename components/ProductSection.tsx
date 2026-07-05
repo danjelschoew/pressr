@@ -108,7 +108,7 @@ export default function ProductSection({ product }: Props) {
                   className="px-8 py-4 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
                   loadingClassName="px-8 py-4 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
                 >
-                  Add to Preparation
+                  Get MATCHDAY
                 </CheckoutButton>
               </div>
 

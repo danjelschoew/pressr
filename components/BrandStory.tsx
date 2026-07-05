@@ -51,20 +51,19 @@ export default function BrandStory() {
               className="flex flex-col gap-6"
             >
               <p className="text-[#6B6B6B] text-lg leading-relaxed">
-                PRESSR was inspired by players who had the talent, but let
-                pressure decide the outcome. Not because they didn&apos;t care.
-                Because they cared too much.
+                PRESSR was built by players who showed up well — but weren&apos;t ready when it counted.
+                Talent wasn&apos;t the problem. Preparation was.
               </p>
               <p className="text-[#0A0A0A] text-lg leading-relaxed font-medium">
-                We believe footballers should prepare their mind with the same
-                intent they bring to training. Talent gets you noticed.
-                Preparation keeps you ready.
+                Performance starts before the whistle.
+                <br />
+                PRESSR is part of the routine that gets you there.
               </p>
 
               <div className="pt-4 border-t border-black/6 flex items-center gap-4">
                 <div className="w-8 h-px bg-[#0A0A0A]" />
                 <span className="text-[#A0A0A0] text-sm italic">
-                  Founded by a player who learned the hard way.
+                  Built for the 90 minutes that matter.
                 </span>
               </div>
             </motion.div>

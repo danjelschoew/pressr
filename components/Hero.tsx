@@ -14,6 +14,13 @@ const fadeUp: Variants = {
   }),
 };
 
+const trustBadges = [
+  "Made in USA",
+  "Third-Party Tested",
+  "Vegan Friendly",
+  "60 Capsules",
+];
+
 interface Props {
   product: Product;
 }
@@ -48,7 +55,9 @@ export default function Hero({ product }: Props) {
             custom={2} variants={fadeUp} initial="hidden" animate="show"
             className="text-[#6B6B6B] text-lg lg:text-xl leading-relaxed max-w-md"
           >
-            PRESSR is built for footballers who want to show up ready when the game gets loud.
+            You trained all week. Now the pressure starts.
+            <br />
+            PRESSR is built for what happens before kickoff.
           </motion.p>
 
           <motion.div
@@ -59,19 +68,32 @@ export default function Hero({ product }: Props) {
               className="px-7 py-4 rounded-full bg-[#0A0A0A] text-white font-bold text-sm tracking-wide hover:bg-[#C8FF3D] hover:text-black transition-colors duration-200 text-center"
               loadingClassName="px-7 py-4 rounded-full bg-[#0A0A0A]/60 text-white font-bold text-sm tracking-wide text-center cursor-wait"
             >
-              Start Your Preparation
+              Get MATCHDAY
             </CheckoutButton>
             <a
               href="#philosophy"
               className="px-7 py-4 rounded-full border border-black/12 text-[#0A0A0A] font-semibold text-sm tracking-wide hover:border-black/30 hover:bg-black/3 transition-colors duration-200 text-center"
             >
-              Why PRESSR Exists
+              Learn More
             </a>
           </motion.div>
 
           <motion.p custom={4} variants={fadeUp} initial="hidden" animate="show" className="text-[#A0A0A0] text-xs tracking-wide">
             No shortcuts. No magic. Just preparation.
           </motion.p>
+
+          {/* Trust badges */}
+          <motion.div
+            custom={5} variants={fadeUp} initial="hidden" animate="show"
+            className="flex flex-wrap gap-3 pt-2"
+          >
+            {trustBadges.map((badge) => (
+              <span key={badge} className="inline-flex items-center gap-1.5 text-xs text-[#6B6B6B] font-medium">
+                <span className="text-[#C8FF3D] font-black">✓</span>
+                {badge}
+              </span>
+            ))}
+          </motion.div>
         </div>
 
         {/* Product card */}
