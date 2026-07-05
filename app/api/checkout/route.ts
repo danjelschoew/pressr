@@ -19,8 +19,9 @@ export async function POST() {
     const { variantId } = await getProductByHandle(handle);
     const shopifyUrl = await createCart(variantId);
 
-    // Shopify returns the checkoutUrl on the store's primary domain.
-    // No replacement needed — shop.getpressr.com points directly to Shopify.
+    // Shopify returns checkoutUrl on getpressr.com (primary domain).
+    // Vercel's rewrite in next.config.ts intercepts /cart/* and proxies
+    // it to Shopify, so no domain replacement is needed here.
     const checkoutUrl = shopifyUrl;
 
     return NextResponse.json({ checkoutUrl });

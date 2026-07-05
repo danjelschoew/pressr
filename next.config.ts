@@ -10,6 +10,18 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/cart/:path*",
+        destination: "https://marati-5036.myshopify.com/cart/:path*",
+      },
+      {
+        source: "/checkouts/:path*",
+        destination: "https://marati-5036.myshopify.com/checkouts/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
