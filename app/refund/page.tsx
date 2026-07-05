@@ -9,47 +9,39 @@ export default function RefundPage() {
   return (
     <LegalPage title="Refund Policy" lastUpdated="July 2025">
       <Section title="Our Policy">
-        <p>We want you to be satisfied with your PRESSR purchase. If you are not happy with your order for any reason, please contact us within <strong>30 days of delivery</strong> and we will work to make it right.</p>
-      </Section>
-
-      <Section title="Eligibility for Returns">
-        <p>To be eligible for a return or refund:</p>
-        <ul>
-          <li>You must contact us within 30 days of the delivery date</li>
-          <li>The product must be unused and in its original, sealed packaging</li>
-          <li>You must provide proof of purchase (order number or confirmation email)</li>
-        </ul>
-        <p>We cannot accept returns on opened or partially used products due to the nature of dietary supplements, except in cases of a defective or damaged product.</p>
+        <p>All PRESSR sales are final. Because our products are made-to-order dietary supplements, we do not accept returns or exchanges once an order has been placed.</p>
+        <p>The exception is damaged or defective items — see below.</p>
       </Section>
 
       <Section title="Damaged or Defective Items">
-        <p>If your order arrives damaged or with a manufacturing defect, contact us at [Support Email] within 7 days of delivery with your order number and photos of the issue. We will arrange a replacement or full refund at no cost to you.</p>
-      </Section>
-
-      <Section title="How to Request a Refund">
-        <ol>
-          <li>Email [Support Email] with your order number and reason for return</li>
-          <li>We will respond within 2–3 business days with instructions</li>
-          <li>If a return is approved, ship the item back to the address we provide</li>
-          <li>Refunds are issued to the original payment method within 5–10 business days of receiving the return</li>
-        </ol>
-        <p>Return shipping costs are the responsibility of the customer unless the return is due to our error or a defective product.</p>
-      </Section>
-
-      <Section title="Non-Refundable Items">
+        <p>If your order arrives damaged, tampered with, or with a manufacturing defect, contact us at [Support Email] within <strong>7 days of delivery</strong> with:</p>
         <ul>
-          <li>Opened or used products (unless defective)</li>
-          <li>Products returned after 30 days of delivery</li>
-          <li>Products not purchased directly from getpressr.com</li>
+          <li>Your order number</li>
+          <li>A description of the issue</li>
+          <li>Photos of the damaged or defective product</li>
         </ul>
+        <p>We will arrange a replacement or full refund at no cost to you.</p>
+      </Section>
+
+      <Section title="Wrong Item Received">
+        <p>If you received the wrong product, contact us at [Support Email] within 7 days of delivery with your order number and a photo. We will resolve this at no cost to you.</p>
       </Section>
 
       <Section title="Order Cancellations">
-        <p>Orders can be cancelled before they are dispatched. Once an order has been fulfilled and shipped by Supliful, it cannot be cancelled. Please contact us at [Support Email] as soon as possible if you need to cancel.</p>
+        <p>Orders are sent to our fulfillment partner (Supliful) immediately after placement. Cancellations are only possible before the order enters production. Contact us at [Support Email] as soon as possible if you need to cancel — we cannot guarantee cancellation once processing has begun.</p>
+      </Section>
+
+      <Section title="Non-Refundable Situations">
+        <ul>
+          <li>Change of mind or no longer wanting the product</li>
+          <li>Incorrect address entered at checkout</li>
+          <li>Delays caused by the shipping carrier</li>
+          <li>Products purchased outside of getpressr.com</li>
+        </ul>
       </Section>
 
       <Section title="Contact Us">
-        <p>For all refund and return inquiries, contact us at:</p>
+        <p>For all refund inquiries, contact us at:</p>
         <p>[Support Email]<br />[Business Entity]<br />[Business Address]</p>
         <p>Or visit our <a href="/contact" className="underline text-[#0A0A0A]">Contact page</a>.</p>
       </Section>
