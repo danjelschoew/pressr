@@ -9,16 +9,29 @@ import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import { fallbackProduct } from "@/lib/product-data";
+import { getShopifyProduct } from "@/lib/shopify";
 
-export default function Home() {
+async function getProduct() {
+  const handle = process.env.SHOPIFY_PRODUCT_HANDLE;
+  if (!handle) return fallbackProduct;
+  try {
+    return await getShopifyProduct(handle);
+  } catch {
+    return fallbackProduct;
+  }
+}
+
+export default async function Home() {
+  const product = await getProduct();
+
   return (
     <>
       <Header />
       <main>
-        <Hero product={fallbackProduct} />
+        <Hero product={product} />
         <ProblemSection />
         <PhilosophyCards />
-        <ProductSection product={fallbackProduct} />
+        <ProductSection product={product} />
         <RoutineTimeline />
         <BrandStory />
         <FAQ />
