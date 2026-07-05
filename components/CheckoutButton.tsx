@@ -8,6 +8,12 @@ interface Props {
   children: React.ReactNode;
 }
 
+const ALLOWED_CHECKOUT_HOSTS = [
+  "shop.getpressr.com",
+  "getpressr.com",
+  "marati-5036.myshopify.com",
+];
+
 export default function CheckoutButton({
   className,
   loadingClassName,
@@ -25,7 +31,13 @@ export default function CheckoutButton({
       const data = (await res.json()) as { checkoutUrl?: string; error?: string };
 
       if (!res.ok || !data.checkoutUrl) {
-        throw new Error(data.error ?? "Checkout unavailable. Please try again.");
+        throw new Error("Checkout unavailable. Please try again.");
+      }
+
+      // Validate the redirect target is a known Shopify domain.
+      const url = new URL(data.checkoutUrl);
+      if (!ALLOWED_CHECKOUT_HOSTS.includes(url.hostname)) {
+        throw new Error("Checkout unavailable. Please try again.");
       }
 
       window.location.href = data.checkoutUrl;

@@ -2,21 +2,31 @@
 // The Storefront access token lives exclusively in process.env and is never
 // sent to the browser — clients call /api/checkout which proxies through here.
 
+import type { Product } from "@/types/product";
+
 function getEndpoint(): { url: string; token: string } {
-  // Use SHOPIFY_API_DOMAIN for Storefront API calls — must be the
-  // .myshopify.com domain regardless of what custom domain the store uses.
   const raw = process.env.SHOPIFY_API_DOMAIN ?? process.env.SHOPIFY_STORE_DOMAIN ?? "";
   const domain = raw
     .replace(/^https?:\/\//, "")
     .replace(/\/admin\/?$/, "")
     .replace(/\/$/, "");
 
-  const url = `https://${domain}/api/2024-10/graphql.json`;
-  console.log("[shopify] Storefront API URL:", url);
+  if (!domain) {
+    throw new Error(
+      "Shopify domain is not configured. Set SHOPIFY_API_DOMAIN in your environment variables."
+    );
+  }
+
+  const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ?? "";
+  if (!token) {
+    throw new Error(
+      "Shopify Storefront token is not configured. Set SHOPIFY_STOREFRONT_ACCESS_TOKEN in your environment variables."
+    );
+  }
 
   return {
-    url,
-    token: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ?? "",
+    url: `https://${domain}/api/2024-10/graphql.json`,
+    token,
   };
 }
 
@@ -38,30 +48,32 @@ async function storefrontFetch<T>(
     });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    throw new Error(`Network error fetching ${url}: ${msg}`);
+    throw new Error(`Network error reaching Shopify: ${msg}`);
   }
 
   if (!res.ok) {
     let body = "";
     try { body = await res.text(); } catch { /* ignore */ }
-    throw new Error(
-      `Shopify ${res.status} ${res.statusText} — URL: ${url} — body: ${body.slice(0, 300)}`
-    );
+    // Log full detail server-side only; callers receive a generic message.
+    console.error(`[shopify] ${res.status} ${res.statusText}`, body.slice(0, 300));
+    throw new Error(`Shopify returned ${res.status} ${res.statusText}`);
   }
 
   const json = (await res.json()) as { data: T; errors?: { message: string }[] };
 
   if (json.errors?.length) {
-    throw new Error(json.errors.map((e) => e.message).join(", "));
+    console.error("[shopify] GraphQL errors:", json.errors);
+    throw new Error("Shopify request failed.");
   }
 
   return json.data;
 }
 
-// ─── Get first available variant for a product handle ─────────────────────────
+// ─── Single query: fetch product + first variant + create cart ────────────────
+// Combines the former getProductByHandle + createCart two-step into one export.
 
-const PRODUCT_QUERY = `
-  query GetProduct($handle: String!) {
+const CHECKOUT_QUERY = `
+  query GetProductForCheckout($handle: String!) {
     product(handle: $handle) {
       variants(first: 1) {
         edges {
@@ -75,7 +87,22 @@ const PRODUCT_QUERY = `
   }
 `;
 
-interface ProductData {
+const CART_CREATE_MUTATION = `
+  mutation CartCreate($variantId: ID!) {
+    cartCreate(input: {
+      lines: [{ merchandiseId: $variantId, quantity: 1 }]
+    }) {
+      cart {
+        checkoutUrl
+      }
+      userErrors {
+        message
+      }
+    }
+  }
+`;
+
+interface CheckoutQueryData {
   product: {
     variants: {
       edges: { node: { id: string; availableForSale: boolean } }[];
@@ -83,28 +110,41 @@ interface ProductData {
   } | null;
 }
 
-export async function getProductByHandle(
-  handle: string
-): Promise<{ variantId: string }> {
-  const data = await storefrontFetch<ProductData>(PRODUCT_QUERY, { handle });
+interface CartCreateData {
+  cartCreate: {
+    cart: { checkoutUrl: string } | null;
+    userErrors: { message: string }[];
+  };
+}
 
-  const variant = data.product?.variants.edges[0]?.node;
+export async function createCheckout(handle: string): Promise<string> {
+  const productData = await storefrontFetch<CheckoutQueryData>(CHECKOUT_QUERY, { handle });
 
+  const variant = productData.product?.variants.edges[0]?.node;
   if (!variant) {
-    throw new Error(
-      `No variant found for product handle "${handle}". ` +
-        `Check SHOPIFY_PRODUCT_HANDLE in your environment variables.`
-    );
+    throw new Error(`No variant found for product "${handle}".`);
   }
-
   if (!variant.availableForSale) {
     throw new Error("This product is currently out of stock.");
   }
 
-  return { variantId: variant.id };
+  const cartData = await storefrontFetch<CartCreateData>(CART_CREATE_MUTATION, {
+    variantId: variant.id,
+  });
+
+  if (cartData.cartCreate.userErrors.length) {
+    throw new Error(cartData.cartCreate.userErrors.map((e) => e.message).join(", "));
+  }
+
+  const checkoutUrl = cartData.cartCreate.cart?.checkoutUrl;
+  if (!checkoutUrl) {
+    throw new Error("Shopify did not return a checkout URL.");
+  }
+
+  return checkoutUrl;
 }
 
-// ─── Get full product data for page rendering ──────────────────────────────────
+// ─── Full product data for page rendering ─────────────────────────────────────
 
 const FULL_PRODUCT_QUERY = `
   query GetFullProduct($handle: String!) {
@@ -165,8 +205,6 @@ function formatPrice(amount: string, currencyCode: string): string {
   }).format(parseFloat(amount));
 }
 
-import type { Product } from "@/types/product";
-
 export async function getShopifyProduct(handle: string): Promise<Product> {
   const data = await storefrontFetch<FullProductData>(FULL_PRODUCT_QUERY, { handle });
 
@@ -207,53 +245,9 @@ export async function getShopifyProduct(handle: string): Promise<Product> {
     ],
     imageUrl: p.featuredImage?.url ?? null,
     imageAlt: p.featuredImage?.altText ?? p.title,
-    checkoutUrl: "#",
+    checkoutUrl: "/api/checkout",
     available: variants.some((v) => v.available),
     variants,
     badge: "Football Performance",
   };
-}
-
-// ─── Create a Shopify cart and return the checkout URL ────────────────────────
-
-const CART_CREATE_MUTATION = `
-  mutation CartCreate($variantId: ID!) {
-    cartCreate(input: {
-      lines: [{ merchandiseId: $variantId, quantity: 1 }]
-    }) {
-      cart {
-        checkoutUrl
-      }
-      userErrors {
-        message
-      }
-    }
-  }
-`;
-
-interface CartCreateData {
-  cartCreate: {
-    cart: { checkoutUrl: string } | null;
-    userErrors: { message: string }[];
-  };
-}
-
-export async function createCart(variantId: string): Promise<string> {
-  const data = await storefrontFetch<CartCreateData>(CART_CREATE_MUTATION, {
-    variantId,
-  });
-
-  if (data.cartCreate.userErrors.length) {
-    throw new Error(
-      data.cartCreate.userErrors.map((e) => e.message).join(", ")
-    );
-  }
-
-  const checkoutUrl = data.cartCreate.cart?.checkoutUrl;
-
-  if (!checkoutUrl) {
-    throw new Error("Shopify did not return a checkout URL.");
-  }
-
-  return checkoutUrl;
 }
