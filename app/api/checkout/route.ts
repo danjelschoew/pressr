@@ -1,11 +1,11 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { getProductByHandle, createCart } from "@/lib/shopify";
 
 export function GET() {
   return NextResponse.json({ ok: true, message: "Checkout API route exists" });
 }
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   const handle = process.env.SHOPIFY_PRODUCT_HANDLE;
 
   if (!handle) {
@@ -19,19 +19,12 @@ export async function POST(req: NextRequest) {
     const { variantId } = await getProductByHandle(handle);
     const shopifyUrl = await createCart(variantId);
 
-    // Replace the domain Shopify returns (e.g. getpressr.com) with the
-    // host of this request (localhost:3001 locally, getpressr.com in prod).
-    // This ensures the /cart/:path* rewrite in next.config.ts is used in
-    // both environments to proxy the cart permalink to Shopify.
+    // Shopify returns the checkoutUrl on the store's primary domain (getpressr.com).
+    // We replace it with the .myshopify.com domain so the browser goes directly
+    // to Shopify without passing through Vercel, avoiding a redirect loop.
     const parsed = new URL(shopifyUrl);
-    const host = req.headers.get("host") ?? parsed.host;
-    const proto = host.startsWith("localhost") ? "http" : "https";
-    parsed.host = host;
-    parsed.protocol = proto;
+    parsed.hostname = "marati-5036.myshopify.com";
     const checkoutUrl = parsed.toString();
-
-    console.log("[checkout] Shopify URL:", shopifyUrl);
-    console.log("[checkout] Rewritten URL:", checkoutUrl);
 
     return NextResponse.json({ checkoutUrl });
   } catch (err) {
