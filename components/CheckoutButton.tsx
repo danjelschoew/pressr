@@ -22,12 +22,19 @@ export default function CheckoutButton({
 
     try {
       const res = await fetch("/api/checkout", { method: "POST" });
-      const data = (await res.json()) as { checkoutUrl?: string; error?: string };
+      const data = (await res.json()) as { checkoutUrl?: string; error?: string; debug?: { originalUrl: string; finalUrl: string } };
+
+      console.log("[checkout] Full API response:", data);
+      if (data.debug) {
+        console.log("[checkout] Original URL:", data.debug.originalUrl);
+        console.log("[checkout] Final URL:", data.debug.finalUrl);
+      }
 
       if (!res.ok || !data.checkoutUrl) {
         throw new Error(data.error ?? "Checkout unavailable. Please try again.");
       }
 
+      console.log("[checkout] Redirecting browser to:", data.checkoutUrl);
       window.location.href = data.checkoutUrl;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");

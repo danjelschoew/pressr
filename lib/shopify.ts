@@ -236,7 +236,9 @@ interface CartCreateData {
   };
 }
 
-export async function createCart(variantId: string): Promise<string> {
+export async function createCart(
+  variantId: string
+): Promise<{ originalUrl: string; finalUrl: string }> {
   const data = await storefrontFetch<CartCreateData>(CART_CREATE_MUTATION, {
     variantId,
   });
@@ -247,15 +249,15 @@ export async function createCart(variantId: string): Promise<string> {
     );
   }
 
-  const checkoutUrl = data.cartCreate.cart?.checkoutUrl;
+  const originalUrl = data.cartCreate.cart?.checkoutUrl;
 
-  if (!checkoutUrl) {
+  if (!originalUrl) {
     throw new Error("Shopify did not return a checkout URL.");
   }
 
-  // Replace the domain Shopify returns (may be custom domain) with the
-  // myshopify.com domain so the checkout URL resolves correctly.
-  const parsed = new URL(checkoutUrl);
+  const parsed = new URL(originalUrl);
   parsed.hostname = "marati-5036.myshopify.com";
-  return parsed.toString();
+  const finalUrl = parsed.toString();
+
+  return { originalUrl, finalUrl };
 }

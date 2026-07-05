@@ -17,8 +17,15 @@ export async function POST() {
 
   try {
     const { variantId } = await getProductByHandle(handle);
-    const checkoutUrl = await createCart(variantId);
-    return NextResponse.json({ checkoutUrl });
+    const { originalUrl, finalUrl } = await createCart(variantId);
+
+    console.log("[checkout] Original checkoutUrl from Shopify:", originalUrl);
+    console.log("[checkout] Final checkoutUrl after domain replacement:", finalUrl);
+
+    const responseBody = { checkoutUrl: finalUrl, debug: { originalUrl, finalUrl } };
+    console.log("[checkout] Full JSON response:", JSON.stringify(responseBody));
+
+    return NextResponse.json(responseBody);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Checkout unavailable.";
     console.error("[PRESSR] /api/checkout error:", message);
