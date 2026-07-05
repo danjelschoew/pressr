@@ -6,6 +6,7 @@ import ProductSection from "@/components/ProductSection";
 import RoutineTimeline from "@/components/RoutineTimeline";
 import BrandStory from "@/components/BrandStory";
 import Ingredients from "@/components/Ingredients";
+import ProductDisclaimer from "@/components/ProductDisclaimer";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -36,6 +37,7 @@ export default async function Home() {
         <RoutineTimeline />
         <BrandStory />
         <Ingredients />
+        <ProductDisclaimer />
         <FAQ />
         <FinalCTA />
       </main>

@@ -19,6 +19,7 @@ const trustBadges = [
   "Third-Party Tested",
   "Vegan Friendly",
   "60 Capsules",
+  "Ships from USA",
 ];
 
 interface Props {

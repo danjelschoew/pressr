@@ -91,7 +91,7 @@ export default function Ingredients() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-10 text-[#A0A0A0] text-xs leading-relaxed max-w-2xl"
         >
-          These statements have not been evaluated by the Food and Drug Administration. PRESSR MATCHDAY is not intended to diagnose, treat, cure or prevent any disease. If you have a medical condition or take medication, consult your doctor before use.
+          Dietary supplement. These statements have not been evaluated by the Food and Drug Administration. PRESSR MATCHDAY is not intended to diagnose, treat, cure, or prevent any disease.
         </motion.p>
       </div>
     </section>
