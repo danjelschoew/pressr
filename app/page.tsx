@@ -5,6 +5,7 @@ import PhilosophyCards from "@/components/PhilosophyCards";
 import ProductSection from "@/components/ProductSection";
 import RoutineTimeline from "@/components/RoutineTimeline";
 import BrandStory from "@/components/BrandStory";
+import Ingredients from "@/components/Ingredients";
 import FAQ from "@/components/FAQ";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -34,6 +35,7 @@ export default async function Home() {
         <ProductSection product={product} />
         <RoutineTimeline />
         <BrandStory />
+        <Ingredients />
         <FAQ />
         <FinalCTA />
       </main>

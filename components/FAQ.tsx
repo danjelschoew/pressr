@@ -5,16 +5,20 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
+    q: "What's in PRESSR MATCHDAY?",
+    a: "PRESSR MATCHDAY contains Ashwagandha (KSM-66), Vitamin D, Vitamin B12 and Black Pepper Extract in a vegan capsule. Every ingredient is chosen for a specific reason and listed clearly on the label. No proprietary blends, no hidden fillers.",
+  },
+  {
+    q: "Are the ingredients safe?",
+    a: "Yes. All four ingredients are well-researched and widely used in sports nutrition. Ashwagandha (KSM-66) has been studied extensively with a strong safety profile. If you have a medical condition or take medication, consult your doctor before use.",
+  },
+  {
     q: "Is PRESSR a mental health brand?",
     a: "No. PRESSR is a football performance brand. We focus on preparation, habits and matchday mindset. PRESSR products are not intended to diagnose, treat, cure or prevent any condition.",
   },
   {
     q: "Will this make me play better?",
     a: "No product can guarantee performance. PRESSR is about building a more intentional preparation system around matchday.",
-  },
-  {
-    q: "What is PRESSR MATCHDAY?",
-    a: "PRESSR MATCHDAY is an ashwagandha supplement designed to fit into your matchday preparation.",
   },
   {
     q: "Who is PRESSR for?",
