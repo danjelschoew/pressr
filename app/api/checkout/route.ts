@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { getProductByHandle, createCart } from "@/lib/shopify";
 
 export function GET() {
   return NextResponse.json({ ok: true, message: "Checkout API route exists" });
 }
 
-export async function POST() {
+export async function POST(req: NextRequest) {
   const handle = process.env.SHOPIFY_PRODUCT_HANDLE;
 
   if (!handle) {
@@ -17,15 +17,23 @@ export async function POST() {
 
   try {
     const { variantId } = await getProductByHandle(handle);
-    const { originalUrl, finalUrl } = await createCart(variantId);
+    const shopifyUrl = await createCart(variantId);
 
-    console.log("[checkout] Original checkoutUrl from Shopify:", originalUrl);
-    console.log("[checkout] Final checkoutUrl after domain replacement:", finalUrl);
+    // Replace the domain Shopify returns (e.g. getpressr.com) with the
+    // host of this request (localhost:3001 locally, getpressr.com in prod).
+    // This ensures the /cart/:path* rewrite in next.config.ts is used in
+    // both environments to proxy the cart permalink to Shopify.
+    const parsed = new URL(shopifyUrl);
+    const host = req.headers.get("host") ?? parsed.host;
+    const proto = host.startsWith("localhost") ? "http" : "https";
+    parsed.host = host;
+    parsed.protocol = proto;
+    const checkoutUrl = parsed.toString();
 
-    const responseBody = { checkoutUrl: finalUrl, debug: { originalUrl, finalUrl } };
-    console.log("[checkout] Full JSON response:", JSON.stringify(responseBody));
+    console.log("[checkout] Shopify URL:", shopifyUrl);
+    console.log("[checkout] Rewritten URL:", checkoutUrl);
 
-    return NextResponse.json(responseBody);
+    return NextResponse.json({ checkoutUrl });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Checkout unavailable.";
     console.error("[PRESSR] /api/checkout error:", message);

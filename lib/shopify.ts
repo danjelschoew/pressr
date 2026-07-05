@@ -3,7 +3,9 @@
 // sent to the browser — clients call /api/checkout which proxies through here.
 
 function getEndpoint(): { url: string; token: string } {
-  const raw = process.env.SHOPIFY_STORE_DOMAIN ?? "";
+  // Use SHOPIFY_API_DOMAIN for Storefront API calls — must be the
+  // .myshopify.com domain regardless of what custom domain the store uses.
+  const raw = process.env.SHOPIFY_API_DOMAIN ?? process.env.SHOPIFY_STORE_DOMAIN ?? "";
   const domain = raw
     .replace(/^https?:\/\//, "")
     .replace(/\/admin\/?$/, "")
@@ -236,9 +238,7 @@ interface CartCreateData {
   };
 }
 
-export async function createCart(
-  variantId: string
-): Promise<{ originalUrl: string; finalUrl: string }> {
+export async function createCart(variantId: string): Promise<string> {
   const data = await storefrontFetch<CartCreateData>(CART_CREATE_MUTATION, {
     variantId,
   });
@@ -249,15 +249,11 @@ export async function createCart(
     );
   }
 
-  const originalUrl = data.cartCreate.cart?.checkoutUrl;
+  const checkoutUrl = data.cartCreate.cart?.checkoutUrl;
 
-  if (!originalUrl) {
+  if (!checkoutUrl) {
     throw new Error("Shopify did not return a checkout URL.");
   }
 
-  const parsed = new URL(originalUrl);
-  parsed.hostname = "marati-5036.myshopify.com";
-  const finalUrl = parsed.toString();
-
-  return { originalUrl, finalUrl };
+  return checkoutUrl;
 }
