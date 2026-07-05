@@ -4,14 +4,16 @@
 
 function getEndpoint(): { url: string; token: string } {
   const raw = process.env.SHOPIFY_STORE_DOMAIN ?? "";
-  const domain =
-    raw
-      .replace(/^https?:\/\//, "")
-      .replace(/\/$/, "")
-      .replace(/\.myshopify\.com$/, "") + ".myshopify.com";
+  const domain = raw
+    .replace(/^https?:\/\//, "")
+    .replace(/\/admin\/?$/, "")
+    .replace(/\/$/, "");
+
+  const url = `https://${domain}/api/2024-10/graphql.json`;
+  console.log("[shopify] Storefront API URL:", url);
 
   return {
-    url: `https://${domain}/api/2024-10/graphql.json`,
+    url,
     token: process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN ?? "",
   };
 }
@@ -22,17 +24,27 @@ async function storefrontFetch<T>(
 ): Promise<T> {
   const { url, token } = getEndpoint();
 
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Shopify-Storefront-Access-Token": token,
-    },
-    body: JSON.stringify({ query, variables }),
-  });
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Shopify-Storefront-Access-Token": token,
+      },
+      body: JSON.stringify({ query, variables }),
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    throw new Error(`Network error fetching ${url}: ${msg}`);
+  }
 
   if (!res.ok) {
-    throw new Error(`Shopify ${res.status} ${res.statusText}`);
+    let body = "";
+    try { body = await res.text(); } catch { /* ignore */ }
+    throw new Error(
+      `Shopify ${res.status} ${res.statusText} — URL: ${url} — body: ${body.slice(0, 300)}`
+    );
   }
 
   const json = (await res.json()) as { data: T; errors?: { message: string }[] };
