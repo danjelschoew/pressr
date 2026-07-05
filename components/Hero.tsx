@@ -123,7 +123,7 @@ export default function Hero({ product }: Props) {
                 className="w-full py-3 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
                 loadingClassName="w-full py-3 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
               >
-                Add to Preparation
+                Buy Now
               </CheckoutButton>
             </div>
           </div>
