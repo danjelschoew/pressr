@@ -253,5 +253,9 @@ export async function createCart(variantId: string): Promise<string> {
     throw new Error("Shopify did not return a checkout URL.");
   }
 
-  return checkoutUrl;
+  // Replace the domain Shopify returns (may be custom domain) with the
+  // myshopify.com domain so the checkout URL resolves correctly.
+  const parsed = new URL(checkoutUrl);
+  parsed.hostname = "marati-5036.myshopify.com";
+  return parsed.toString();
 }
