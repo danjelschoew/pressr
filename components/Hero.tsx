@@ -120,10 +120,10 @@ export default function Hero({ product }: Props) {
               </div>
 
               <CheckoutButton
-                className="w-full py-3 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
-                loadingClassName="w-full py-3 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
+                className="w-full px-6 py-[13px] rounded-full bg-[#C8FF3D] text-black text-[15px] font-semibold tracking-wide text-center hover:brightness-105 hover:scale-[1.02] active:scale-[0.98] transition-all duration-150 flex items-center justify-center"
+                loadingClassName="w-full px-6 py-[13px] rounded-full bg-[#C8FF3D]/60 text-black text-[15px] font-semibold tracking-wide text-center cursor-wait flex items-center justify-center"
               >
-                Buy Now
+                Get MATCHDAY
               </CheckoutButton>
             </div>
           </div>
