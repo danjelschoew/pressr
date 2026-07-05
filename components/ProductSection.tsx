@@ -96,19 +96,21 @@ export default function ProductSection({ product }: Props) {
             </div>
 
             <div className="flex flex-col gap-4 pt-4 border-t border-black/6">
-              <div className="flex items-baseline gap-3">
-                <span className="text-[#0A0A0A] font-black text-4xl">{product.price}</span>
-                {product.compareAtPrice && (
-                  <span className="text-[#A0A0A0] text-lg line-through">{product.compareAtPrice}</span>
-                )}
-              </div>
+              <div className="flex items-center gap-4 flex-wrap">
+                <div className="flex items-baseline gap-3">
+                  <span className="text-[#0A0A0A] font-black text-4xl">{product.price}</span>
+                  {product.compareAtPrice && (
+                    <span className="text-[#A0A0A0] text-lg line-through">{product.compareAtPrice}</span>
+                  )}
+                </div>
 
-              <CheckoutButton
-                className="px-8 py-4 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
-                loadingClassName="px-8 py-4 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
-              >
-                Add to Preparation
-              </CheckoutButton>
+                <CheckoutButton
+                  className="px-8 py-4 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
+                  loadingClassName="px-8 py-4 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
+                >
+                  Add to Preparation
+                </CheckoutButton>
+              </div>
 
               <p className="text-[#A0A0A0] text-xs">
                 Part of the preparation. Not a shortcut.

@@ -1,8 +1,4 @@
 const footerLinks = {
-  social: [
-    { label: "Instagram", href: "#instagram" },
-    { label: "TikTok", href: "#tiktok" },
-  ],
   legal: [
     { label: "Terms", href: "#terms" },
     { label: "Privacy", href: "#privacy" },
@@ -18,11 +14,6 @@ export default function Footer() {
         </a>
 
         <nav className="flex flex-wrap items-center justify-center gap-6">
-          {footerLinks.social.map((link) => (
-            <a key={link.label} href={link.href} className="text-sm text-[#555] hover:text-white transition-colors">
-              {link.label}
-            </a>
-          ))}
           <a href="mailto:hello@pressr.co" className="text-sm text-[#555] hover:text-white transition-colors">
             Contact
           </a>
