@@ -33,7 +33,7 @@ export default function Footer() {
           ))}
         </nav>
 
-        <p className="text-[#333] text-xs">&copy; {new Date().getFullYear()} PRESSR. All rights reserved.</p>
+        <p className="text-[#555] text-xs">PRESSR — Football performance starts before kickoff.</p>
       </div>
 
       <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-white/5">

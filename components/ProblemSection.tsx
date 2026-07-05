@@ -25,9 +25,9 @@ export default function ProblemSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0A0A0A] leading-tight tracking-tight mb-10"
         >
-          Talent isn't always
+          Talent is only
           <br />
-          the problem.
+          part of the game.
         </motion.h2>
 
         <motion.p
@@ -36,10 +36,12 @@ export default function ProblemSection() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="text-[#6B6B6B] text-lg lg:text-xl leading-relaxed max-w-2xl"
         >
-          Some players dominate training, then overthink when the whistle blows.
-          One bad touch. One missed chance. One look from the coach.{" "}
+          Every footballer trains their touch, speed, passing and finishing. But
+          matchday asks for more. The pressure before kickoff. The mistake that
+          stays in your head. The moment the coach is watching. The difference
+          between playing free in training and playing tight in the match.{" "}
           <span className="text-[#0A0A0A] font-semibold">
-            PRESSR was built for the players who know they have more in them.
+            PRESSR was built for those moments.
           </span>
         </motion.p>
 

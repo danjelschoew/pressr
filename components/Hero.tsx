@@ -36,23 +36,19 @@ export default function Hero({ product }: Props) {
             custom={1} variants={fadeUp} initial="hidden" animate="show"
             className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.0] tracking-tight text-[#0A0A0A]"
           >
-            Pressure changes
+            Train hard.
             <br />
             <span className="relative inline-block">
-              players.
+              Prepare different.
               <span className="absolute -bottom-1 left-0 right-0 h-3 bg-[#C8FF3D] -z-10 rounded" />
             </span>
-            <br />
-            Preparation changes
-            <br />
-            pressure.
           </motion.h1>
 
           <motion.p
             custom={2} variants={fadeUp} initial="hidden" animate="show"
             className="text-[#6B6B6B] text-lg lg:text-xl leading-relaxed max-w-md"
           >
-            Built for footballers who want to stay calm when the game gets loud.
+            PRESSR is built for footballers who want to show up ready when the game gets loud.
           </motion.p>
 
           <motion.div
@@ -63,18 +59,18 @@ export default function Hero({ product }: Props) {
               className="px-7 py-4 rounded-full bg-[#0A0A0A] text-white font-bold text-sm tracking-wide hover:bg-[#C8FF3D] hover:text-black transition-colors duration-200 text-center"
               loadingClassName="px-7 py-4 rounded-full bg-[#0A0A0A]/60 text-white font-bold text-sm tracking-wide text-center cursor-wait"
             >
-              Start Your Routine
+              Start Your Preparation
             </CheckoutButton>
             <a
               href="#philosophy"
               className="px-7 py-4 rounded-full border border-black/12 text-[#0A0A0A] font-semibold text-sm tracking-wide hover:border-black/30 hover:bg-black/3 transition-colors duration-200 text-center"
             >
-              Learn the Method
+              Why PRESSR Exists
             </a>
           </motion.div>
 
           <motion.p custom={4} variants={fadeUp} initial="hidden" animate="show" className="text-[#A0A0A0] text-xs tracking-wide">
-            Designed for matchday routines. No magic. Just preparation.
+            No shortcuts. No magic. Just preparation.
           </motion.p>
         </div>
 
@@ -127,7 +123,7 @@ export default function Hero({ product }: Props) {
                 className="w-full py-3 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
                 loadingClassName="w-full py-3 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
               >
-                Add to Routine
+                Add to Preparation
               </CheckoutButton>
             </div>
           </div>

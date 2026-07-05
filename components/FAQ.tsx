@@ -5,20 +5,20 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    q: "Is PRESSR a cure for anxiety?",
-    a: "No. PRESSR is not a medical product and does not treat anxiety or any condition. It is designed as part of a consistent matchday routine.",
+    q: "Is PRESSR a mental health brand?",
+    a: "No. PRESSR is a football performance brand. We focus on preparation, habits and matchday mindset. PRESSR products are not intended to diagnose, treat, cure or prevent any condition.",
   },
   {
     q: "Will this make me play better?",
-    a: "No supplement can guarantee performance. PRESSR is about preparation, routine and consistency.",
+    a: "No product can guarantee performance. PRESSR is about building a more intentional preparation system around matchday.",
   },
   {
-    q: "Who is it for?",
-    a: "Footballers who want to build a calmer, more intentional pre-match routine.",
+    q: "What is PRESSR MATCHDAY?",
+    a: "PRESSR MATCHDAY is an ashwagandha supplement designed to fit into your matchday preparation.",
   },
   {
-    q: "Can I connect this to Shopify?",
-    a: "Yes. The product section is structured so Shopify product data and checkout can be connected later.",
+    q: "Who is PRESSR for?",
+    a: "Ambitious footballers who train hard and want to prepare with more intent before kickoff.",
   },
 ];
 

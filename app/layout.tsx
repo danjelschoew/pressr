@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PRESSR — Prepare Your Mind Like You Prepare Your Body",
+  title: "PRESSR | Football Performance Starts Before Kickoff",
   description:
-    "PRESSR is a faceless football performance brand helping players aged 15–25 build a calmer, more intentional pre-match routine.",
+    "PRESSR is a football performance brand built for ambitious players who want to prepare their body and mind for matchday.",
 };
 
 export default function RootLayout({

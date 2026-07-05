@@ -5,21 +5,21 @@ import { motion, useInView } from "framer-motion";
 
 const pillars = [
   {
-    label: "Mind",
-    headline: "Control the noise before it controls you.",
-    body: "The game starts in your head before it starts on the pitch. Build mental clarity as part of your pre-match system.",
+    label: "Body",
+    headline: "Train the body.",
+    body: "Speed, strength, touch and technique matter. They always will.",
     icon: "◎",
   },
   {
-    label: "Routine",
-    headline: "Build a repeatable pre-match system.",
-    body: "Champions don't wing it. They repeat what works. Stack small habits and walk into every game feeling ready.",
+    label: "Mind",
+    headline: "Prepare the mind.",
+    body: "Because pressure changes how players think, move and decide.",
     icon: "⌁",
   },
   {
     label: "Next Play",
-    headline: "Mistake made? Reset. Next ball.",
-    body: "You can't change what just happened. You can choose what happens next. That reset is a skill. Train it.",
+    headline: "Play the next ball.",
+    body: "Mistake made? Reset. Stay in the game.",
     icon: "→",
   },
 ];
@@ -48,7 +48,7 @@ export default function PhilosophyCards() {
           >
             Three pillars.
             <br />
-            One routine.
+            One preparation.
           </motion.h2>
         </div>
 

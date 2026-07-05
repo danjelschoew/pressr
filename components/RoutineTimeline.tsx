@@ -6,17 +6,17 @@ import { motion, useInView } from "framer-motion";
 const steps = [
   {
     time: "24h before",
-    actions: ["Sleep", "Hydrate", "Prepare kit"],
+    actions: ["Sleep", "Hydrate", "Prepare your kit"],
     accent: "The foundation. Miss these and nothing else matters.",
   },
   {
     time: "3h before",
-    actions: ["Light meal", "Calm environment"],
+    actions: ["Eat light", "Stay calm", "Keep the noise low"],
     accent: "Reduce noise. Protect your headspace.",
   },
   {
     time: "60 min before",
-    actions: ["Warm-up", "Music", "Breathing"],
+    actions: ["Warm up", "Breathe", "Lock in"],
     accent: "Activate the body. Quiet the mind.",
   },
   {
@@ -47,9 +47,9 @@ export default function RoutineTimeline() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#0A0A0A] leading-tight tracking-tight mb-16"
         >
-          The matchday
+          The game starts
           <br />
-          routine.
+          before kickoff.
         </motion.h2>
 
         <div className="relative flex flex-col gap-0">

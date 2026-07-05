@@ -33,12 +33,12 @@ export default function BrandStory() {
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className="text-4xl sm:text-5xl font-black text-[#0A0A0A] leading-tight tracking-tight"
               >
-                The player who
+                Built for the
                 <br />
-                had everything
+                players who
                 <br />
                 <span className="relative inline-block">
-                  but the moment.
+                  care.
                   <span className="absolute -bottom-1 left-0 right-0 h-2 bg-[#C8FF3D] -z-10 rounded" />
                 </span>
               </motion.h2>
@@ -51,13 +51,14 @@ export default function BrandStory() {
               className="flex flex-col gap-6"
             >
               <p className="text-[#6B6B6B] text-lg leading-relaxed">
-                PRESSR was inspired by a player who had the talent, but let
-                pressure decide the outcome. Not because he didn&apos;t care.
-                Because he cared too much.
+                PRESSR was inspired by players who had the talent, but let
+                pressure decide the outcome. Not because they didn&apos;t care.
+                Because they cared too much.
               </p>
               <p className="text-[#0A0A0A] text-lg leading-relaxed font-medium">
-                The mission is simple: help the next generation prepare their
-                mind like they prepare their body.
+                We believe footballers should prepare their mind with the same
+                intent they bring to training. Talent gets you noticed.
+                Preparation keeps you ready.
               </p>
 
               <div className="pt-4 border-t border-black/6 flex items-center gap-4">

@@ -3,11 +3,11 @@ import type { Product } from "@/types/product";
 const checkoutUrl = process.env.NEXT_PUBLIC_CHECKOUT_URL ?? "#";
 
 export const fallbackProduct: Product = {
-  id: "pressr-match-routine-gummies",
-  title: "PRESSR Match Routine Gummies",
+  id: "pressr-matchday",
+  title: "PRESSR MATCHDAY",
   description:
-    "Ashwagandha gummies designed to become part of your pre-match routine.",
-  shortDescription: "Your pre-match ritual. In a gummy.",
+    "Ashwagandha capsules designed to fit into your matchday preparation.",
+  shortDescription: "Part of the preparation. Not a shortcut.",
   price: "$34.95",
   compareAtPrice: undefined,
   ingredients: [
@@ -17,9 +17,9 @@ export const fallbackProduct: Product = {
     { name: "Natural Flavours" },
   ],
   imageUrl: null,
-  imageAlt: "PRESSR Match Routine Gummies",
+  imageAlt: "PRESSR MATCHDAY",
   checkoutUrl,
   available: true,
-  variants: [{ id: "default", title: "30 Gummies", price: "$34.95", available: true }],
-  badge: "Matchday Edition",
+  variants: [{ id: "default", title: "30 Capsules", price: "$34.95", available: true }],
+  badge: "Football Performance",
 };

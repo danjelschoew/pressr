@@ -107,11 +107,11 @@ export default function ProductSection({ product }: Props) {
                 className="px-8 py-4 rounded-full bg-[#C8FF3D] text-black text-sm font-bold tracking-wide text-center hover:bg-[#0A0A0A] hover:text-white transition-colors duration-200"
                 loadingClassName="px-8 py-4 rounded-full bg-[#C8FF3D]/60 text-black text-sm font-bold tracking-wide text-center cursor-wait"
               >
-                Add to Routine
+                Add to Preparation
               </CheckoutButton>
 
               <p className="text-[#A0A0A0] text-xs">
-                Free shipping on orders over $50. 30-day routine guarantee.
+                Part of the preparation. Not a shortcut.
               </p>
             </div>
           </motion.div>
