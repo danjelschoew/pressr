@@ -19,12 +19,9 @@ export async function POST() {
     const { variantId } = await getProductByHandle(handle);
     const shopifyUrl = await createCart(variantId);
 
-    // Shopify returns the checkoutUrl on the store's primary domain (getpressr.com).
-    // We replace it with the .myshopify.com domain so the browser goes directly
-    // to Shopify without passing through Vercel, avoiding a redirect loop.
-    const parsed = new URL(shopifyUrl);
-    parsed.hostname = "marati-5036.myshopify.com";
-    const checkoutUrl = parsed.toString();
+    // Shopify returns the checkoutUrl on the store's primary domain.
+    // No replacement needed — shop.getpressr.com points directly to Shopify.
+    const checkoutUrl = shopifyUrl;
 
     return NextResponse.json({ checkoutUrl });
   } catch (err) {
