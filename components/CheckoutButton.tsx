@@ -34,7 +34,6 @@ export default function CheckoutButton({
         throw new Error("Checkout unavailable. Please try again.");
       }
 
-      // Validate the redirect target is a known Shopify domain.
       const url = new URL(data.checkoutUrl);
       if (!ALLOWED_CHECKOUT_HOSTS.includes(url.hostname)) {
         throw new Error("Checkout unavailable. Please try again.");
